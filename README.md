@@ -8,7 +8,8 @@ Para estas cuatro partes se irán haciendo una serie de preguntas que al final d
 ## Integrantes del equipo
 
 Carlota Stocks Galván-EstoKesss
-Vera Valentín Avellón
+Vera Valentín Avellón- veravalentin
+Covadonga González González-covagonzalez
 
 ## Objetivos del trabajo
 
