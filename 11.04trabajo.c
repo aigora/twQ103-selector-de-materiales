@@ -88,12 +88,8 @@ int main(){
             	
             	system("cls");
             	
-            	if(proyecto[nproyectos].reaccion==1){
-            		printf("\n\n\n");
-            		printf("                        Elija el recipiente que va a utlilizar para su reaccion (escriba su eleccion por pantalla):\n\n\n");
-					printf("                                                         tubo\n\n");
-					printf("                                                         vaso\n\n");
-					printf("                                                         probeta\n");
+            	
+            		imprimirTiposRecipiente(proyecto[nproyectos]);
             		scanf("%s", proyecto[nproyectos].tipoRecipiente);
             		system("cls");
             		
@@ -105,155 +101,44 @@ int main(){
 	                	printf("Error en la apertura del fichero\n");
 	                	return -1;
 	                }
-	                
-	                	fprintf(fichero, " Reaccion: 2CaO + 2H2O = 2Ca(OH)\n Material: %s\n Tipo de recipiente: %s", proyecto[nproyectos].material, proyecto[nproyectos].tipoRecipiente);
+	                NombreReaccion(proyecto[nproyectos],NombreReacc);
+	                	fprintf(fichero, " Reaccion: %s\n Material: %s\n Tipo de recipiente: %s",NombreReacc, proyecto[nproyectos].material, proyecto[nproyectos].tipoRecipiente);
                  	
                 	fclose(fichero);
                 	
-                	NombreReaccion(proyecto[nproyectos],NombreReacc);
+                	
                 	imprimirDatosPantalla(proyecto[nproyectos],NombreReacc);
                  	
 	               
-	            	
-                 	
-                	
-				}
-				else if(proyecto[nproyectos].reaccion==5){
-            		printf("El recip mas adecuado es un vaso\n");
-            		strcpy(proyecto[nproyectos].tipoRecipiente,"vaso");
-            		
-            		NombreProyecto(nameT, nproyectos);
-            		fichero=fopen(nameT,"w");
-                    if(fichero==NULL){
-	                	printf("Error en la apertura del fichero\n");
-	                	return -1;
-	                }
-	                
-	                	fprintf(fichero, " Reaccion: 2AgNO3 + Cu = Cu(NO3)2 + 2Ag\n Material: %s\n Tipo de recipiente: %s", proyecto[nproyectos].material, proyecto[nproyectos].tipoRecipiente);
-                 	
-                	fclose(fichero);
-                	
-                	NombreReaccion(proyecto[nproyectos],NombreReacc);
-                	imprimirDatosPantalla(proyecto[nproyectos],NombreReacc);
-				}
-				else if(proyecto[nproyectos].reaccion==7){
-            		printf("Elija un recipiente:\n  matraz\n  vaso\n");
-            		scanf("%s", proyecto[nproyectos].tipoRecipiente);
-            		
-            		NombreProyecto(nameT, nproyectos);
-            		fichero=fopen(nameT,"w");
-                    if(fichero==NULL){
-	                	printf("Error en la apertura del fichero\n");
-	                	return -1;
-	                }
-	                
-	                	fprintf(fichero, " Reaccion: K2Cr2O7 + 14HCl = 2CrCl3 + 3 Cl2 + 2KCl + 7H2O\n Material: %s\n Tipo de recipiente: %s", proyecto[nproyectos].material, proyecto[nproyectos].tipoRecipiente);
-                 	
-                	fclose(fichero);
-                	
-                	NombreReaccion(proyecto[nproyectos],NombreReacc);
-                	imprimirDatosPantalla(proyecto[nproyectos],NombreReacc);
-				}
+	            
+				
 			}
 			else if(proyecto[nproyectos].reaccion==2||proyecto[nproyectos].reaccion==3||proyecto[nproyectos].reaccion==4||proyecto[nproyectos].reaccion==6||proyecto[nproyectos].reaccion==8){
 				strcpy(proyecto[nproyectos].material,"vidrio");
             	
+            		system("cls");
             	
-            	if(proyecto[nproyectos].reaccion==2){
-            		printf("Elija un recipiente:\n  tubo\n  vaso\n  probeta\n");
+            	
+            		imprimirTiposRecipiente(proyecto[nproyectos]);
             		scanf("%s", proyecto[nproyectos].tipoRecipiente);
+            		system("cls");
+            		
             		
             		NombreProyecto(nameT, nproyectos);
+            		
             		fichero=fopen(nameT,"w");
                     if(fichero==NULL){
 	                	printf("Error en la apertura del fichero\n");
 	                	return -1;
 	                }
-	                
-	                	fprintf(fichero, " Reaccion: CuSO4 + Fe = FeSO4\n Material: %s\n Tipo de recipiente: %s", proyecto[nproyectos].material, proyecto[nproyectos].tipoRecipiente);
+	                NombreReaccion(proyecto[nproyectos],NombreReacc);
+	                	fprintf(fichero, " Reaccion: %s\n Material: %s\n Tipo de recipiente: %s",NombreReacc, proyecto[nproyectos].material, proyecto[nproyectos].tipoRecipiente);
                  	
                 	fclose(fichero);
                 	
-                	NombreReaccion(proyecto[nproyectos],NombreReacc);
-                	imprimirDatosPantalla(proyecto[nproyectos],NombreReacc);
-				}
-				
-				else if(proyecto[nproyectos].reaccion==3){
-            		printf("Elija un recipiente:\n  matraz\n  vaso\n");
-            		scanf("%s", proyecto[nproyectos].tipoRecipiente);
-            		
-            		NombreProyecto(nameT, nproyectos);
-            		fichero=fopen(nameT,"w");
-                    if(fichero==NULL){
-	                	printf("Error en la apertura del fichero\n");
-	                	return -1;
-	                }
-	                
-	                	fprintf(fichero, " Reaccion: CuSO4 + Fe = FeSO4\n Material: %s\n Tipo de recipiente: %s", proyecto[nproyectos].material, proyecto[nproyectos].tipoRecipiente);
-                 	
-                	fclose(fichero);
                 	
-                	NombreReaccion(proyecto[nproyectos],NombreReacc);
                 	imprimirDatosPantalla(proyecto[nproyectos],NombreReacc);
-				}
-				
-				else if(proyecto[nproyectos].reaccion==4){
-            		printf("Elija un recipiente:\n  tubo\n  vaso\n");
-            		scanf("%s", proyecto[nproyectos].tipoRecipiente);
-            		
-            		
-            		NombreProyecto(nameT, nproyectos);
-            		fichero=fopen(nameT,"w");
-                    if(fichero==NULL){
-	                	printf("Error en la apertura del fichero\n");
-	                	return -1;
-	                }
-	                
-	                	fprintf(fichero, " Reaccion: NH3 + HCl = NH4Cl\n Material: %s\n Tipo de recipiente: %s", proyecto[nproyectos].material, proyecto[nproyectos].tipoRecipiente);
-                 	
-                	fclose(fichero);
-                	
-                	NombreReaccion(proyecto[nproyectos],NombreReacc);
-                	imprimirDatosPantalla(proyecto[nproyectos],NombreReacc);
-				}
-				
-				else if(proyecto[nproyectos].reaccion==6){
-            		printf("Elija un recipiente:\n  tubo\n  vaso\n probeta\n");
-            		scanf("%s", proyecto[nproyectos].tipoRecipiente);
-            		
-            		NombreProyecto(nameT, nproyectos);
-            		fichero=fopen(nameT,"w");
-                    if(fichero==NULL){
-	                	printf("Error en la apertura del fichero\n");
-	                	return -1;
-	                }
-	                
-	                	fprintf(fichero, " Reaccion: NH4OH + HCL = NHACl + H2O\n Material: %s\n Tipo de recipiente: %s", proyecto[nproyectos].material, proyecto[nproyectos].tipoRecipiente);
-                 	
-                	fclose(fichero);
-				}
-				
-				
-				
-				else if(proyecto[nproyectos].reaccion==8){
-            		printf("Elija un recipiente:\n  tubo\n  vaso\n probeta\n");
-            		scanf("%s", proyecto[nproyectos].tipoRecipiente);
-            		
-            		
-            		NombreProyecto(nameT, nproyectos);
-            		fichero=fopen(nameT,"w");
-                    if(fichero==NULL){
-	                	printf("Error en la apertura del fichero\n");
-	                	return -1;
-	                }
-	                
-	                	fprintf(fichero, " Reaccion: 2MnO4 + 2H = 2O2 + H2 + 2MnO2\n Material: %s\n Tipo de recipiente: %s", proyecto[nproyectos].material, proyecto[nproyectos].tipoRecipiente);
-                 	
-                	fclose(fichero);
-                	
-                	NombreReaccion(proyecto[nproyectos],NombreReacc);
-                	imprimirDatosPantalla(proyecto[nproyectos],NombreReacc);
-				}
+            	
 			}
 			
 			
@@ -391,11 +276,36 @@ void imprimirBanner(){
 	printf("                                                                                                    \n");
 	printf("                                                                                                    \n");
 }
-/*void imprimirTiposRecipiente(struct proyectos proyecto){
+void imprimirTiposRecipiente(struct proyectos proyecto){
 	if(proyecto.reaccion==1||proyecto.reaccion==2||proyecto.reaccion==8||proyecto.reaccion==6){
+		printf("\n\n\n");
+        printf("                        Elija el recipiente que va a utlilizar para su reaccion (escriba su eleccion por pantalla):\n\n\n");
+		printf("                                                         tubo\n\n");
+		printf("                                                         vaso\n\n");
+		printf("                                                         probeta\n");
 		
 	}
-}*/
+	else if(proyecto.reaccion==3||proyecto.reaccion==7){
+		printf("\n\n\n");
+        printf("                        Elija el recipiente que va a utlilizar para su reaccion (escriba su eleccion por pantalla):\n\n\n");
+		printf("                                                         matraz\n\n");
+		printf("                                                         vaso\n\n");
+		
+	}
+	else if(proyecto.reaccion==4){
+		printf("\n\n\n");
+        printf("                        Elija el recipiente que va a utlilizar para su reaccion (escriba su eleccion por pantalla):\n\n\n");
+		printf("                                                         tubo\n\n");
+		printf("                                                         vaso\n\n");
+		
+	}
+	else if(proyecto.reaccion==5){
+		printf("\n\n\n");
+        printf("                        Elija el recipiente que va a utlilizar para su reaccion (escriba su eleccion por pantalla):\n\n\n");
+		printf("                                                         vaso\n\n");
+		
+	}
+}
 void imprimirDatosPantalla(struct proyectos proyecto,char NombreReacc[]){
 	                printf("\n\n                                   Este es el proyecto que ha creado:\n\n\n");
 					printf("                                                  Reaccion: %s\n\n", NombreReacc);
