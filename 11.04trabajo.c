@@ -11,7 +11,7 @@ struct proyectos{
 	float precio;
 	};
 	
-//int CalcularPesupuesto(struct proyectos proyecto);
+float CalcularPresupuesto(struct proyectos proyecto);
 
 void NombreProyecto(char nameT[], int nproyectos);
 void NombreReaccion(struct proyectos proyecto,char NombreReacc[]);
@@ -31,7 +31,7 @@ int main(){
 	char opcion;
 	int n=0;
 	FILE * fichero;
-	
+	float cuenta;
     char NombreReacc[100];
     char nameT[40];
    
@@ -94,6 +94,9 @@ int main(){
             		system("cls");
             		
             		
+            		cuenta=CalcularPresupuesto(proyecto[nproyectos]);
+            		cuenta=proyecto[nproyectos].precio;
+            		
             		NombreProyecto(nameT, nproyectos);
             		
             		fichero=fopen(nameT,"w");
@@ -102,12 +105,13 @@ int main(){
 	                	return -1;
 	                }
 	                NombreReaccion(proyecto[nproyectos],NombreReacc);
-	                	fprintf(fichero, " Reaccion: %s\n Material: %s\n Tipo de recipiente: %s",NombreReacc, proyecto[nproyectos].material, proyecto[nproyectos].tipoRecipiente);
+	                	fprintf(fichero, " Reaccion: %s\n Material: %s\n Tipo de recipiente: %s\n Precio final: %f euros",NombreReacc, proyecto[nproyectos].material, proyecto[nproyectos].tipoRecipiente,proyecto[nproyectos].precio);
                  	
                 	fclose(fichero);
-                	
-                	
                 	imprimirDatosPantalla(proyecto[nproyectos],NombreReacc);
+                	
+                	
+                	
                  	
 	               
 	            
@@ -172,51 +176,45 @@ int main(){
 	
 	
 }
-//proyecto[nproj].precio= CalcularPresupuesto(proyecto[nproyectos]);
 
-/*float CalcularPesupuesto(struct proyectos proyecto){
-	float cuenta = 0;
+
+float CalcularPresupuesto(struct proyectos proyecto){
+	float cuenta = 0.0;
 	
 	if(proyecto.material=="plastico"){
 		
-		cuenta=5;
-		
-	    switch(proyecto.tipoRecipiente){
-	    	
-	    	case 'tubo':
-	    		cuenta*0.1;
-			break;
-	    	case 'matraz':
-	    		cuenta*2;
-	    	break;
-	    	case 'vaso':
-	    		cuenta*0.75;
-	    	break;
-	    	case 'probeta':
-	    		cuenta*1.5;
-	    	break;
+		cuenta=5.0;
+		if(stcmp(proyecto.tipoRecipiente,"tubo")==0){
+		cuenta*0.1;	
 		}
+		else if(strcmp(proyecto.tipoRecipiente,"matraz")==0){
+		cuenta*2.0;	
+		}
+		else if(strcmp(proyecto.tipoRecipiente,"vaso")==0){
+		cuenta*0.75;	
+		}
+		else if(strcmp(proyecto.tipoRecipiente,"probeta")==0){
+		cuenta*1.5;	
+		}
+	    
 	}
 	else if(proyecto.material=="vidrio"){
-		switch(proyecto.tipoRecipiente){
-	    	
-	    	case 'tubo':
-	    		cuenta*0.3;
-			break;
-	    	case 'matraz':
-	    		cuenta*2.5;
-	    	break;
-	    	case 'vaso':
-	    		cuenta*1.75;
-	    	break;
-	    	case 'probeta':
-	    		cuenta*2.25;
-	    	break;
+		if(strcmp(proyecto.tipoRecipiente,"tubo")==0){
+		cuenta*0.3;	
+		}
+		else if(strcmp(proyecto.tipoRecipiente,"matraz")==0){
+		cuenta*2.5;	
+		}
+		else if(strcmp(proyecto.tipoRecipiente,"vaso")==0){
+		cuenta*1.25;	
+		}
+		else if(strcmp(proyecto.tipoRecipiente,"probeta")==0){
+		cuenta*2.0;	
 		}
 		
 	}
 	return cuenta;
-}*/
+}
 
 
 void NombreProyecto(char nameT[], int nproyectos){
@@ -311,7 +309,7 @@ void imprimirDatosPantalla(struct proyectos proyecto,char NombreReacc[]){
 					printf("                                                  Reaccion: %s\n\n", NombreReacc);
 					printf("                                                  Material: %s\n\n", proyecto.material);
 					printf("                                                  Tipo de recipiente: %s\n\n\n", proyecto.tipoRecipiente);
-	                printf("                                  Estos datos se han guardado en un documento de texto.\n\n");
-					printf("                                   Pulse ENTER ara calcular el precio de su proyecto\n\n");
+	                //printf("                                  Estos datos se han guardado en un documento de texto.\n\n");
+					printf("                                   Pulse 'p' ara calcular el precio de su proyecto\n\n");
 	
 }
