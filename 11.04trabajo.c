@@ -4,14 +4,15 @@
  
 
 struct proyectos{
-	int reaccion; //hay 8 reacciones
-	char material[100]; //plastico o vidrio
+	int reaccion; 
+	char material[100]; 
 	char tipoRecipiente[100]; //tubo, vaso, probeta, matraz
-	//char tamano[100]; //pequeño, mediano, grande
 	float precio;
 	};
 	
-void CalcularPesupuesto(struct proyectos proyecto);
+//int CalcularPesupuesto(struct proyectos proyecto);
+void NombreProyecto(char nameT[], int nproyectos);
+
 
 int main(){
 	
@@ -20,27 +21,21 @@ int main(){
 	 
 	
 	struct proyectos proyecto[100];  
-	int i,nproyectos=0;
+	int i=0,nproyectos=0;
 	char opcion;
 	int n=0;
 	FILE * fichero;
 	
-    char name[30]="proyectoReacc";
-   	char nameT[30];
-    snprintf(nameT,sizeof name,"%s%d.txt",name, nproyectos); // esta función coge name, y un numero de bytes igual al tamaño de name,
-	// y copia %s%d.txt donde %s es name y %d nproyectos y lo almacena en name
-            		
-    while(access(nameT,F_OK) != -1){ //accedes al proyecto y compruebas si existe
-    nproyectos++; 
-    snprintf(nameT,sizeof name,"%s%d.txt",name, nproyectos);
-	}
+    
+    char nameT[40];
+   
 	
 
-	
+	//NombreProyecto(nameT,nproyectos);
 	
 	do{
 		
-	   
+	   //MENÚ DE OPCIONES
 	   printf("Elija una opcion:\nA. Iniciar proyecto nuevo\nB. Modificar/ver proyecto\nC. Recomendaciones\nD. Salir del programa\n");
 	   fflush(stdin);
        scanf("%c",&opcion);
@@ -51,7 +46,7 @@ int main(){
 	   switch(opcion){
 	    	case 'A': 
 	    	
-	    	nproyectos++;
+	    	//nproyectos++;
 	    	
 	    	
 	    	
@@ -74,6 +69,7 @@ int main(){
             		scanf("%s", proyecto[nproyectos].tipoRecipiente);
             		
             		
+            		NombreProyecto(nameT, nproyectos);
             		
             		fichero=fopen(nameT,"w");
                     if(fichero==NULL){
@@ -86,28 +82,19 @@ int main(){
                 	fclose(fichero);
                 	
                 	
-                	fichero=fopen("proyectoReacc1.txt","r");
-                	if(fichero==NULL){
-		                 printf("error en la apertura del fichero\n");
-	                    	return -1;
-                 	}
-                 	
-	                while(fscanf(fichero,"%i\n %s\n %s\n ",proyecto[n].reaccion, proyecto[n].material,proyecto[n].tipoRecipiente )!=EOF){
-		            n++;
-                    }
-	               fclose(fichero);
+                 	printf("\n\n Este es el proyecto que ha creado:\n\nReaccion: 2CaO + 2H2O = 2Ca(OH)\n Material: %s\n Tipo de recipiente: %s\n\n", proyecto[nproyectos].material, proyecto[nproyectos].tipoRecipiente);
+	                printf("Estos datos se han guardado en un documento de texto.\n\nPulse ENTER ara calcular el precio de su proyecto\n\n");
 	               
-	               for(i=0;i<n;i++){
-	            	printf("%i\n %s\n %s\n ",proyecto[i].reaccion, proyecto[i].material,proyecto[i].tipoRecipiente);
-                 	} 
+	            	
+                 	
                 	
 				}
 				else if(proyecto[nproyectos].reaccion==5){
             		printf("El recip mas adecuado es un vaso\n");
             		strcpy(proyecto[nproyectos].tipoRecipiente,"vaso");
             		
-            		
-            		fichero=fopen("proyectoReacc5.txt","w");
+            		NombreProyecto(nameT, nproyectos);
+            		fichero=fopen(nameT,"w");
                     if(fichero==NULL){
 	                	printf("Error en la apertura del fichero\n");
 	                	return -1;
@@ -121,8 +108,8 @@ int main(){
             		printf("Elija un recipiente:\n  matraz\n  vaso\n");
             		scanf("%s", proyecto[nproyectos].tipoRecipiente);
             		
-            		
-            		fichero=fopen("proyectoReacc7.txt","w");
+            		NombreProyecto(nameT, nproyectos);
+            		fichero=fopen(nameT,"w");
                     if(fichero==NULL){
 	                	printf("Error en la apertura del fichero\n");
 	                	return -1;
@@ -141,8 +128,8 @@ int main(){
             		printf("Elija un recipiente:\n  tubo\n  vaso\n  probeta\n");
             		scanf("%s", proyecto[nproyectos].tipoRecipiente);
             		
-            		
-            		fichero=fopen("proyectoReacc2.txt","w");
+            		NombreProyecto(nameT, nproyectos);
+            		fichero=fopen(nameT,"w");
                     if(fichero==NULL){
 	                	printf("Error en la apertura del fichero\n");
 	                	return -1;
@@ -157,8 +144,8 @@ int main(){
             		printf("Elija un recipiente:\n  matraz\n  vaso\n");
             		scanf("%s", proyecto[nproyectos].tipoRecipiente);
             		
-            		
-            		fichero=fopen("proyectoReacc3.txt","w");
+            		NombreProyecto(nameT, nproyectos);
+            		fichero=fopen(nameT,"w");
                     if(fichero==NULL){
 	                	printf("Error en la apertura del fichero\n");
 	                	return -1;
@@ -174,8 +161,8 @@ int main(){
             		scanf("%s", proyecto[nproyectos].tipoRecipiente);
             		
             		
-            		
-            		fichero=fopen("proyectoReacc4.txt","w");
+            		NombreProyecto(nameT, nproyectos);
+            		fichero=fopen(nameT,"w");
                     if(fichero==NULL){
 	                	printf("Error en la apertura del fichero\n");
 	                	return -1;
@@ -190,8 +177,8 @@ int main(){
             		printf("Elija un recipiente:\n  tubo\n  vaso\n probeta\n");
             		scanf("%s", proyecto[nproyectos].tipoRecipiente);
             		
-            		
-            		fichero=fopen("proyectoReacc6.txt","w");
+            		NombreProyecto(nameT, nproyectos);
+            		fichero=fopen(nameT,"w");
                     if(fichero==NULL){
 	                	printf("Error en la apertura del fichero\n");
 	                	return -1;
@@ -209,8 +196,8 @@ int main(){
             		scanf("%s", proyecto[nproyectos].tipoRecipiente);
             		
             		
-            		
-            		fichero=fopen("proyectoReacc8.txt","w");
+            		NombreProyecto(nameT, nproyectos);
+            		fichero=fopen(nameT,"w");
                     if(fichero==NULL){
 	                	printf("Error en la apertura del fichero\n");
 	                	return -1;
@@ -253,7 +240,7 @@ int main(){
 	
 	
 }
-/*proyecto[nproj].precio= CalcularPresupiesto(proyecto[nproj]);
+/*proyecto[nproj].precio= CalcularPresupuesto(proyecto[nproyectos]);
 
 float CalcularPesupuesto(struct proyectos proyecto){
 	float cuenta = 0;
@@ -298,3 +285,16 @@ float CalcularPesupuesto(struct proyectos proyecto){
 	}
 	return cuenta;
 }*/
+void NombreProyecto(char nameT[], int nproyectos){
+	
+	char name[30]="proyectoReacc";
+   	
+    snprintf(nameT,sizeof name,"%s%d.txt",name, nproyectos); // esta función coge name, y un numero de bytes igual al tamaño de name,
+	// y copia %s%d.txt donde %s es name y %d nproyectos y lo almacena en name
+            		
+    while(access(nameT,F_OK) != -1){ //accedes al proyecto y compruebas si existe
+    nproyectos++; 
+    snprintf(nameT,sizeof name,"%s%d.txt",name, nproyectos);
+	}
+		
+}
