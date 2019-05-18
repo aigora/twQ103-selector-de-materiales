@@ -1,3 +1,4 @@
+
 #include<stdio.h>
 #include<string.h>
 #include<unistd.h> // acceder a access, una funcion que permite saber que existe un fichero o no 
@@ -11,7 +12,9 @@ struct proyectos{
 	};
 	
 //int CalcularPesupuesto(struct proyectos proyecto);
+
 void NombreProyecto(char nameT[], int nproyectos);
+void NombreReaccion(struct proyectos proyecto,char NombreReacc[]);
 
 
 int main(){
@@ -26,12 +29,12 @@ int main(){
 	int n=0;
 	FILE * fichero;
 	
-    
+    char NombreReacc[100];
     char nameT[40];
    
 	
 
-	//NombreProyecto(nameT,nproyectos);
+
 	
 	do{
 		
@@ -81,8 +84,8 @@ int main(){
                  	
                 	fclose(fichero);
                 	
-                	
-                 	printf("\n\n Este es el proyecto que ha creado:\n\nReaccion: 2CaO + 2H2O = 2Ca(OH)\n Material: %s\n Tipo de recipiente: %s\n\n", proyecto[nproyectos].material, proyecto[nproyectos].tipoRecipiente);
+                	NombreReaccion(proyecto,NombreReacc);
+                 	printf("\n\n Este es el proyecto que ha creado:\n\n Reaccion: %s\n Material: %s\n Tipo de recipiente: %s\n\n", NombreReacc, proyecto[nproyectos].material, proyecto[nproyectos].tipoRecipiente);
 	                printf("Estos datos se han guardado en un documento de texto.\n\nPulse ENTER ara calcular el precio de su proyecto\n\n");
 	               
 	            	
@@ -297,4 +300,27 @@ void NombreProyecto(char nameT[], int nproyectos){
     snprintf(nameT,sizeof name,"%s%d.txt",name, nproyectos);
 	}
 		
+}
+void NombreReaccion(struct proyectos proyecto,char NombreReacc[]){
+	
+	switch(proyecto.reaccion){
+		
+		case '1':
+			strcpy(NombreReacc,"2CaO + 2H2O = 2Ca(OH)");
+		break;
+		/*case '2':
+		break;
+		case '3':
+		break;
+		case '4':
+		break;
+		case '5':
+		break;
+		case '6':
+		break;
+		case '7':
+		break;
+		case '8':
+		break;*/
+	}
 }
