@@ -18,7 +18,7 @@ void NombreReaccion(struct proyectos proyecto,char NombreReacc[]);
 void imprimirBanner();
 void imprimirTiposRecipiente(struct proyectos proyecto);
 void imprimirDatosPantalla(struct proyectos proyecto,char NombreReacc[]);
-
+//void imprimirDatosRecomendada(int reaccionRecom);
 
 int main(){
 	
@@ -26,12 +26,14 @@ int main(){
 	
 	 
 	
-	struct proyectos proyecto[100];  
+	struct proyectos proyecto[100]; 
+	struct proyectos recomendaciones[100];
 	int i=0,nproyectos=0;
-	char opcion;
+	char opcion,pulse,reaccionRecom;
 	int n=0;
 	FILE * fichero;
 	float cuenta;
+	
     char NombreReacc[100];
     char nameT[40];
    
@@ -94,8 +96,8 @@ int main(){
             		system("cls");
             		
             		
-            		cuenta=CalcularPresupuesto(proyecto[nproyectos]);
-            		cuenta=proyecto[nproyectos].precio;
+            		proyecto[nproyectos].precio=CalcularPresupuesto(proyecto[nproyectos]);
+            		
             		
             		NombreProyecto(nameT, nproyectos);
             		
@@ -105,10 +107,20 @@ int main(){
 	                	return -1;
 	                }
 	                NombreReaccion(proyecto[nproyectos],NombreReacc);
-	                	fprintf(fichero, " Reaccion: %s\n Material: %s\n Tipo de recipiente: %s\n Precio final: %f euros",NombreReacc, proyecto[nproyectos].material, proyecto[nproyectos].tipoRecipiente,proyecto[nproyectos].precio);
+	                	fprintf(fichero, " Reaccion: %s\n Material: %s\n Tipo de recipiente: %s\n Precio final: %.2f euros",NombreReacc, proyecto[nproyectos].material, proyecto[nproyectos].tipoRecipiente,proyecto[nproyectos].precio);
                  	
                 	fclose(fichero);
                 	imprimirDatosPantalla(proyecto[nproyectos],NombreReacc);
+                	
+                	if(n==0){
+                	printf("                                   Pulse 'p' para calcular el precio de su proyecto\n\n");
+                	scanf("%c",&pulse);
+                	
+					}
+					if(pulse=='p'){
+                	   printf("El precio de su material es %.2f\n\n",proyecto[nproyectos].precio);
+					  }
+                	
                 	
                 	
                 	
@@ -127,6 +139,7 @@ int main(){
             		scanf("%s", proyecto[nproyectos].tipoRecipiente);
             		system("cls");
             		
+            		proyecto[nproyectos].precio=CalcularPresupuesto(proyecto[nproyectos]);
             		
             		NombreProyecto(nameT, nproyectos);
             		
@@ -136,7 +149,7 @@ int main(){
 	                	return -1;
 	                }
 	                NombreReaccion(proyecto[nproyectos],NombreReacc);
-	                	fprintf(fichero, " Reaccion: %s\n Material: %s\n Tipo de recipiente: %s",NombreReacc, proyecto[nproyectos].material, proyecto[nproyectos].tipoRecipiente);
+	                fprintf(fichero, " Reaccion: %s\n Material: %s\n Tipo de recipiente: %s\n Precio final: %.2f euros",NombreReacc, proyecto[nproyectos].material, proyecto[nproyectos].tipoRecipiente,proyecto[nproyectos].precio);
                  	
                 	fclose(fichero);
                 	
@@ -154,7 +167,34 @@ int main(){
 	    
 	    	
 		    case 'b': 
-		    printf("Seleccione su proyecto:\n");
+		    
+		    printf("\n\n\n");
+	    	printf("                         Seleccione la reaccion para la cual quiere la eleccion de material recomendada:\n\n\n");
+			printf("                                               1. 2CaO + 2H2O = 2Ca(OH)2\n\n");
+			printf("                                               2. CuSO4 + Fe = FeSO4\n\n");
+			printf("                                               3. NH3 + HCl = NH4Cl\n\n");
+			printf("                                               4. NaCl + AgNO3 = NaNO3 + AgCl\n\n");
+			printf("                                               5. 2AgNO3 + Cu = Cu(NO3)2 + 2Ag\n\n");
+			printf("                                               6. NH4OH + HCL = NHACl + H2O\n\n");
+			printf("                                               7. K2Cr2O7 + 14HCl = 2CrCl3 + 3 Cl2 + 2KCl + 7H2O\n\n");
+			printf("                                               8. 2MnO4 + 2H = 2O2 + H2 + 2MnO2\n\n");
+			printf("                                               9. Volver\n");
+	        fflush(stdin);
+            scanf("%i", &reaccionRecom);
+            
+            switch(reaccionRecom){
+            	case 1:
+            		fichero=fopen("recomendacion0.txt","r");
+            		if(fichero==NULL){
+	                	printf("Error en la apertura del fichero\n");
+	                	return -1;
+	                }
+	                fscanf(fichero, "%s %s", recomendaciones[0].material,recomendaciones[0].tipoRecipiente);
+	                printf("%s\n %s\n",recomendaciones[0].material,recomendaciones[0].tipoRecipiente);
+	                
+            	break;
+			}
+		    
 		    
 	    	break;
 			
@@ -163,11 +203,12 @@ int main(){
 	    	
 	    	
 	    	case 'd':
-			
-			return 0;
+			//break;
+			//return 0;
 	    	break;
 	    	
 	    	default: printf("opcion incorrecta");
+	    	break;
 	}
 
     
@@ -179,37 +220,37 @@ int main(){
 
 
 float CalcularPresupuesto(struct proyectos proyecto){
-	float cuenta = 0.0;
+	float cuenta = 5.0;
 	
-	if(proyecto.material=="plastico"){
+	if(strcmp(proyecto.material,"plastico")==0){
 		
-		cuenta=5.0;
-		if(stcmp(proyecto.tipoRecipiente,"tubo")==0){
-		cuenta*0.1;	
+		
+		if(strcmp(proyecto.tipoRecipiente,"tubo")==0){
+		cuenta=cuenta*0.1;	
 		}
 		else if(strcmp(proyecto.tipoRecipiente,"matraz")==0){
-		cuenta*2.0;	
+		cuenta=cuenta*2.0;	
 		}
 		else if(strcmp(proyecto.tipoRecipiente,"vaso")==0){
-		cuenta*0.75;	
+		cuenta=cuenta*0.75;	
 		}
 		else if(strcmp(proyecto.tipoRecipiente,"probeta")==0){
-		cuenta*1.5;	
+		cuenta=cuenta*1.5;	
 		}
 	    
 	}
 	else if(proyecto.material=="vidrio"){
 		if(strcmp(proyecto.tipoRecipiente,"tubo")==0){
-		cuenta*0.3;	
+		cuenta=cuenta*0.3;	
 		}
 		else if(strcmp(proyecto.tipoRecipiente,"matraz")==0){
-		cuenta*2.5;	
+		cuenta=cuenta*2.5;	
 		}
 		else if(strcmp(proyecto.tipoRecipiente,"vaso")==0){
-		cuenta*1.25;	
+		cuenta=cuenta*1.25;	
 		}
 		else if(strcmp(proyecto.tipoRecipiente,"probeta")==0){
-		cuenta*2.0;	
+		cuenta=cuenta*2.0;	
 		}
 		
 	}
@@ -310,6 +351,7 @@ void imprimirDatosPantalla(struct proyectos proyecto,char NombreReacc[]){
 					printf("                                                  Material: %s\n\n", proyecto.material);
 					printf("                                                  Tipo de recipiente: %s\n\n\n", proyecto.tipoRecipiente);
 	                //printf("                                  Estos datos se han guardado en un documento de texto.\n\n");
-					printf("                                   Pulse 'p' ara calcular el precio de su proyecto\n\n");
+					
 	
 }
+
