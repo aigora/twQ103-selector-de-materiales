@@ -30,12 +30,13 @@ int main(){
 	struct proyectos recomendaciones[100];
 	int i=0,nproyectos=0;
 	char opcion,pulse,reaccionRecom;
-	int n=0;
+	int n=0, m=0;
 	FILE * fichero;
 	float cuenta;
 	
     char NombreReacc[100];
     char nameT[40];
+    char enc1[40],cuerp1[40];
    
 	
 	if(n==0){
@@ -63,7 +64,7 @@ int main(){
 	   switch(opcion){
 	    	case 'a': 
 	    	
-	    	//nproyectos++;
+	    	
 	    	
 	    	
 	    	printf("\n\n\n");
@@ -73,7 +74,7 @@ int main(){
 			printf("                                               3. NH3 + HCl = NH4Cl\n\n");
 			printf("                                               4. NaCl + AgNO3 = NaNO3 + AgCl\n\n");
 			printf("                                               5. 2AgNO3 + Cu = Cu(NO3)2 + 2Ag\n\n");
-			printf("                                               6. NH4OH + HCL = NHACl + H2O\n");
+			printf("                                               6. NH4OH + HCL = NHACl + H2O\n\n");
 			printf("                                               7. K2Cr2O7 + 14HCl = 2CrCl3 + 3 Cl2 + 2KCl + 7H2O\n\n");
 			printf("                                               8. 2MnO4 + 2H = 2O2 + H2 + 2MnO2\n\n");
 			printf("                                               9. Volver\n");
@@ -107,10 +108,11 @@ int main(){
 	                	return -1;
 	                }
 	                NombreReaccion(proyecto[nproyectos],NombreReacc);
-	                	fprintf(fichero, " Reaccion: %s\n Material: %s\n Tipo de recipiente: %s\n Precio final: %.2f euros",NombreReacc, proyecto[nproyectos].material, proyecto[nproyectos].tipoRecipiente,proyecto[nproyectos].precio);
+	                	fprintf(fichero, "Reaccion:\t%s\n\nMaterial:\t%s\n\nTipo de recipiente:\t%s\n\nPrecio final:\t%.2f euros",NombreReacc, proyecto[nproyectos].material, proyecto[nproyectos].tipoRecipiente,proyecto[nproyectos].precio);
                  	
                 	fclose(fichero);
                 	imprimirDatosPantalla(proyecto[nproyectos],NombreReacc);
+                	fflush(stdin);
                 	
                 	if(n==0){
                 	printf("                                   Pulse 'p' para calcular el precio de su proyecto\n\n");
@@ -118,7 +120,9 @@ int main(){
                 	
 					}
 					if(pulse=='p'){
-                	   printf("El precio de su material es %.2f\n\n",proyecto[nproyectos].precio);
+                	   printf("                                       El precio de su material es:  %.2f euros\n\n ",proyecto[nproyectos].precio);
+                	    printf("                                 Estos datos se han guardado en un documento de texto.\n");
+                	    printf("                               --------------------------------------------------------\n");
 					  }
                 	
                 	
@@ -149,12 +153,24 @@ int main(){
 	                	return -1;
 	                }
 	                NombreReaccion(proyecto[nproyectos],NombreReacc);
-	                fprintf(fichero, " Reaccion: %s\n Material: %s\n Tipo de recipiente: %s\n Precio final: %.2f euros",NombreReacc, proyecto[nproyectos].material, proyecto[nproyectos].tipoRecipiente,proyecto[nproyectos].precio);
+	                fprintf(fichero, "Reaccion:\t%s\n\nMaterial:\t%s\n\nTipo de recipiente:\t%s\n\nPrecio final:\t%.2f euros",NombreReacc, proyecto[nproyectos].material, proyecto[nproyectos].tipoRecipiente,proyecto[nproyectos].precio);
                  	
                 	fclose(fichero);
                 	
                 	
                 	imprimirDatosPantalla(proyecto[nproyectos],NombreReacc);
+                	fflush(stdin);
+                	
+                	if(n==0){
+                	printf("                                   Pulse 'p' para calcular el precio de su proyecto\n\n");
+                	scanf("%c",&pulse);
+                	
+					}
+					if(pulse=='p'){
+                	   printf("                                       El precio de su material es:  %.2f euros\n\n",proyecto[nproyectos].precio);
+                	    printf("                                 Estos datos se han guardado en un documento de texto.\n");
+                	    printf("                               --------------------------------------------------------\n");
+					  }
             	
 			}
 			
@@ -166,7 +182,7 @@ int main(){
 	
 	    
 	    	
-		    case 'b': 
+		    case 'c': 
 		    
 		    printf("\n\n\n");
 	    	printf("                         Seleccione la reaccion para la cual quiere la eleccion de material recomendada:\n\n\n");
@@ -189,8 +205,22 @@ int main(){
 	                	printf("Error en la apertura del fichero\n");
 	                	return -1;
 	                }
-	                fscanf(fichero, "%s %s", recomendaciones[0].material,recomendaciones[0].tipoRecipiente);
-	                printf("%s\n %s\n",recomendaciones[0].material,recomendaciones[0].tipoRecipiente);
+	                while(fscanf(fichero,"%s\t%s\n\n", enc1[m], proyecto[m].material )!=EOF){
+	                    	m++;
+                    }
+	                fclose(fichero);
+	
+	
+	                //compruebo que se ha leido el fichero corrctamente
+	                   printf("Contador: %i\n",m);
+	
+	                for(i=0;i<m;i++){
+		                printf("%s\t%s\n\n", enc1[m], proyecto[m].material);
+	                }
+	                //fscanf(fichero, "%s\t%s\n\n", enc1,cuerp1 );
+	                //printf("%s\t%s\n", enc1,cuerp1 );
+	                
+	                
 	                
             	break;
 			}
@@ -198,7 +228,7 @@ int main(){
 		    
 	    	break;
 			
-			case 'c':
+			case 'b':
 			break;	
 	    	
 	    	
@@ -350,7 +380,7 @@ void imprimirDatosPantalla(struct proyectos proyecto,char NombreReacc[]){
 					printf("                                                  Reaccion: %s\n\n", NombreReacc);
 					printf("                                                  Material: %s\n\n", proyecto.material);
 					printf("                                                  Tipo de recipiente: %s\n\n\n", proyecto.tipoRecipiente);
-	                //printf("                                  Estos datos se han guardado en un documento de texto.\n\n");
+	               
 					
 	
 }
