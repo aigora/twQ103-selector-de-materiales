@@ -12,7 +12,8 @@ struct proyectos{
 	};
 	
 float CalcularPresupuesto(struct proyectos proyecto);
-
+void NombreReaccionRecom(struct proyectos recomendacion, char NombreReacc[], int reaccionRecom);
+void imprimirDatosRecom(struct proyectos recomendacion,char NombreReacc[], int reaccionRecom);
 void NombreProyecto(char nameT[], int nproyectos);
 void NombreReaccion(struct proyectos proyecto,char NombreReacc[]);
 void imprimirBanner();
@@ -27,7 +28,7 @@ int main(){
 	 
 	
 	struct proyectos proyecto[100]; 
-	struct proyectos recomendaciones[100];
+	struct proyectos recomendacion[8]={ {1,"plastico","vaso",3.75}, {2,"vidrio","probeta",5.00}, {3,"vidrio","matraz",5.00},{4,"vidrio","vaso",5.00}, {5,"plastico","vaso",3.75}, {6,"vidrio","probeta",5.00},{7,"plastico","plastico",10.00},{8,"vidrio","tubo",5.00} };
 	int i=0,nproyectos=0;
 	char opcion,pulse,reaccionRecom;
 	int n=0, m=0;
@@ -52,7 +53,7 @@ int main(){
 	   printf("\n");
 	   printf("                                                   MENU DE OPCIONES:\n\n\n");
 	   printf("                                                   a. Iniciar proyecto nuevo\n\n");
-	   printf("                                                   b. Modificar/ver proyecto\n\n");
+	   printf("                                                   b. Anadir notas al proyecto\n\n");
 	   printf("                                                   c. Recomendaciones\n\n");
 	   printf("                                                   d. Salir del programa\n\n");
 	   fflush(stdin);
@@ -199,36 +200,71 @@ int main(){
             scanf("%i", &reaccionRecom);
             
             switch(reaccionRecom){
+            	
             	case 1:
-            		fichero=fopen("recomendacion0.txt","r");
-            		if(fichero==NULL){
-	                	printf("Error en la apertura del fichero\n");
-	                	return -1;
-	                }
-	                while(fscanf(fichero,"%s\t%s\n\n", enc1[m], proyecto[m].material )!=EOF){
-	                    	m++;
-                    }
-	                fclose(fichero);
-	
-	
-	                //compruebo que se ha leido el fichero corrctamente
-	                   printf("Contador: %i\n",m);
-	
-	                for(i=0;i<m;i++){
-		                printf("%s\t%s\n\n", enc1[m], proyecto[m].material);
-	                }
-	                //fscanf(fichero, "%s\t%s\n\n", enc1,cuerp1 );
-	                //printf("%s\t%s\n", enc1,cuerp1 );
-	                
-	                
+            	system("cls");
+	              NombreReaccionRecom(recomendacion[0],NombreReacc,reaccionRecom);  
+	              imprimirDatosRecom(recomendacion[0], NombreReacc,reaccionRecom);
 	                
             	break;
+            	
+            	case 2:
+            	system("cls");
+	              NombreReaccionRecom(recomendacion[1],NombreReacc,reaccionRecom);  
+	              imprimirDatosRecom(recomendacion[1], NombreReacc,reaccionRecom);
+	                
+            	break;
+            	
+            	case 3:
+            	system("cls");
+	              NombreReaccionRecom(recomendacion[2],NombreReacc,reaccionRecom);  
+	              imprimirDatosRecom(recomendacion[2], NombreReacc,reaccionRecom);
+	                
+            	break;
+            	
+            	case 4:
+            	system("cls");
+	              NombreReaccionRecom(recomendacion[3],NombreReacc,reaccionRecom);  
+	              imprimirDatosRecom(recomendacion[3], NombreReacc,reaccionRecom);
+	                
+            	break;
+            	
+            	case 5:
+            	system("cls");
+	              NombreReaccionRecom(recomendacion[4],NombreReacc,reaccionRecom);  
+	              imprimirDatosRecom(recomendacion[4], NombreReacc,reaccionRecom);
+	                
+            	break;
+            	
+            	case 6:
+            	system("cls");
+	              NombreReaccionRecom(recomendacion[5],NombreReacc,reaccionRecom);  
+	              imprimirDatosRecom(recomendacion[5], NombreReacc,reaccionRecom);
+	                
+            	break;
+            	
+            	case 7:
+            	system("cls");
+	              NombreReaccionRecom(recomendacion[6],NombreReacc,reaccionRecom);  
+	              imprimirDatosRecom(recomendacion[6], NombreReacc,reaccionRecom);
+	                
+            	break;
+            	
+            	case 8:
+            	system("cls");
+	              NombreReaccionRecom(recomendacion[7],NombreReacc,reaccionRecom);  
+	              imprimirDatosRecom(recomendacion[7], NombreReacc,reaccionRecom);
+	                
+            	break;
+            	
+            	
 			}
 		    
 		    
 	    	break;
 			
 			case 'b':
+				
 			break;	
 	    	
 	    	
@@ -384,4 +420,42 @@ void imprimirDatosPantalla(struct proyectos proyecto,char NombreReacc[]){
 					
 	
 }
-
+void imprimirDatosRecom(struct proyectos recomendacion, char NombreReacc[], int reaccionRecom){
+	
+		
+	
+	                printf("\n\n                                   Este es el proyecto recomendado:\n\n\n");
+					printf("                                                  Reaccion: %s\n\n", NombreReacc);
+					printf("                                                  Material: %s\n\n", recomendacion.material);
+					printf("                                                  Tipo de recipiente: %s\n\n\n", recomendacion.tipoRecipiente);
+					printf("                                                  Precio: %.2f\n\n", recomendacion.precio);
+}
+void NombreReaccionRecom(struct proyectos recomendacion, char NombreReacc[],int reaccionRecom){
+	switch(reaccionRecom){
+		
+		case 1:
+			strcpy(NombreReacc,"2CaO + 2H2O = 2Ca(OH)");
+		break;
+		case 2:
+			strcpy(NombreReacc,"CuSO4 + Fe = FeSO4");
+		break;
+		case 3:
+			strcpy(NombreReacc,"NH3 + HCl = NH4Cl");
+		break;
+		case 4:
+			strcpy(NombreReacc,"NaCl + AgNO3 = NaNO3 + AgCl");
+		break;
+		case 5:
+			strcpy(NombreReacc,"2AgNO3 + Cu = Cu(NO3)2 + 2Ag");
+		break;
+		case 6:
+			strcpy(NombreReacc,"NH4OH + HCL = NHACl + H2O");
+		break;
+		case 7:
+			strcpy(NombreReacc,"K2Cr2O7 + 14HCl = 2CrCl3 + 3 Cl2 + 2KCl + 7H2O");
+		break;
+		case 8:
+			strcpy(NombreReacc,"2MnO4 + 2H = 2O2 + H2 + 2MnO2");
+		break;
+	}
+}
