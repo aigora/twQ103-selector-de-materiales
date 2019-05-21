@@ -19,7 +19,8 @@ void NombreReaccion(struct proyectos proyecto,char NombreReacc[]);
 void imprimirBanner();
 void imprimirTiposRecipiente(struct proyectos proyecto);
 void imprimirDatosPantalla(struct proyectos proyecto,char NombreReacc[]);
-//void imprimirDatosRecomendada(int reaccionRecom);
+void conversorMedidas(float medida, int cambio);
+
 
 int main(){
 	
@@ -33,8 +34,8 @@ int main(){
 	char opcion,pulse,reaccionRecom;
 	int n=0, m=0;
 	FILE * fichero;
-	float cuenta;
-	
+	float cuenta, medida;
+	int cambio;
     char NombreReacc[100];
     char nameT[40];
     char enc1[40],cuerp1[40];
@@ -53,7 +54,7 @@ int main(){
 	   printf("\n");
 	   printf("                                                   MENU DE OPCIONES:\n\n\n");
 	   printf("                                                   a. Iniciar proyecto nuevo\n\n");
-	   printf("                                                   b. Anadir notas al proyecto\n\n");
+	   printf("                                                   b. Conversor de unidades para tus medidas\n\n");
 	   printf("                                                   c. Recomendaciones\n\n");
 	   printf("                                                   d. Salir del programa\n\n");
 	   fflush(stdin);
@@ -66,7 +67,8 @@ int main(){
 	    	case 'a': 
 	    	
 	    	
-	    	
+	    	do{
+			
 	    	
 	    	printf("\n\n\n");
 	    	printf("                                   Elija la reaccion que desea llevar a cabo en el laboratorio:\n\n\n");
@@ -81,7 +83,7 @@ int main(){
 			printf("                                               9. Volver\n");
 	        fflush(stdin);
             scanf("%i", &proyecto[nproyectos].reaccion);
-            
+        }while(proyecto[nproyectos].reaccion!=1&& proyecto[nproyectos].reaccion!=2&&proyecto[nproyectos].reaccion!=3&&proyecto[nproyectos].reaccion!=4&& proyecto[nproyectos].reaccion!=5&&proyecto[nproyectos].reaccion!=6&&proyecto[nproyectos].reaccion!=7&&proyecto[nproyectos].reaccion!=8);
             
             system("cls");
 	        
@@ -185,6 +187,9 @@ int main(){
 	    	
 		    case 'c': 
 		    
+		    do{
+			
+		    
 		    printf("\n\n\n");
 	    	printf("                         Seleccione la reaccion para la cual quiere la eleccion de material recomendada:\n\n\n");
 			printf("                                               1. 2CaO + 2H2O = 2Ca(OH)2\n\n");
@@ -196,9 +201,10 @@ int main(){
 			printf("                                               7. K2Cr2O7 + 14HCl = 2CrCl3 + 3 Cl2 + 2KCl + 7H2O\n\n");
 			printf("                                               8. 2MnO4 + 2H = 2O2 + H2 + 2MnO2\n\n");
 			printf("                                               9. Volver\n");
+		
 	        fflush(stdin);
             scanf("%i", &reaccionRecom);
-            
+        }while(reaccionRecom!=1&& reaccionRecom!=2&& reaccionRecom!=3&& reaccionRecom!=4&& reaccionRecom!=5&& reaccionRecom!=6&& reaccionRecom!=7&& reaccionRecom!=8);
             switch(reaccionRecom){
             	
             	case 1:
@@ -264,6 +270,21 @@ int main(){
 	    	break;
 			
 			case 'b':
+				
+				do{
+				system("cls");	
+				
+				printf("\n\n\n");
+				printf("                                       Elige la conversion que deseas realizar:\n\n\n");
+				printf("                                          1. grados Celsius a grados Kelvin\n\n");
+				printf("                                          2. libras a gramos\n\n");
+				printf("                                          3. libra-fuerza/pie^2 a Pascales\n\n");
+				printf("                                          4. calorias a julios\n\n\n");
+				scanf("%i",&cambio);
+			}while(cambio!=1&&cambio!=2&&cambio!=3&&cambio!=4);
+				printf("                                       Introduce la medida que quieres convertir:\n\n");
+				scanf("%f",&medida);
+				conversorMedidas(medida, cambio);
 				
 			break;	
 	    	
@@ -456,6 +477,19 @@ void NombreReaccionRecom(struct proyectos recomendacion, char NombreReacc[],int 
 		break;
 		case 8:
 			strcpy(NombreReacc,"2MnO4 + 2H = 2O2 + H2 + 2MnO2");
+		break;
+	}
+}
+
+void conversorMedidas(float medida, int cambio){
+	switch(cambio){
+		case 1: printf("                                     Su medida en grados Kelvin es %.2f\n\n",medida+273);
+		break;
+		case 2: printf("                                     La cantidad introducida convertida a gramos es %.2f\n\n",medida*453.6);
+		break;
+		case 3: printf("                                     La presion introducida convertida a Pascales es %.2f\n\n",medida*47.880);
+		break;
+		case 4: printf("                                     La energia introducida convertida a Julios es %.2f\n\n",medida*4.184);
 		break;
 	}
 }
